@@ -23,3 +23,16 @@ button:hover {
   gap: 20px;
 
 }
+
+@media  Screen and (max-width:576px){
+  .card-grid{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    padding: 0 40px 0 40px;
+  }
+  .App h1{
+    font-size: 40px;
+  }
+}
