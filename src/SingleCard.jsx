@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/SingleCard.css';
+import './singleCard.css';
 
 
 function SingleCard({card, handleChoice, flipped, disabled}) {

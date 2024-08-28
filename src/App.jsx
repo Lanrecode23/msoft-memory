@@ -42,29 +42,29 @@ function App() {
 
   // check if the two cards match
   useEffect(() => {
-    if (choiceOne && choiceTwo) {
-      setDisabled(true);
-      if (choiceOne.src === choiceTwo.src) {
-        setCards((prevCard)=>{
-          return prevCard.map((card) => {
-            if (card.src === choiceOne.src || card.src === choiceTwo.src) {
-              return {...card, matched: true };    
-            }else{
+  if (choiceOne && choiceTwo) {
+    setDisabled(true);
+    if (choiceOne.src === choiceTwo.src) {
+      setCards((prevCards) => {
+        return prevCards.map((card) => {
+          if (card.src === choiceOne.src) {
+            return { ...card, matched: true };
+          } else {
             return card;
-            }
-          })
-          
-        })
-      
+          }
+        });
+      });
+      alertify.notify('Items matched!', 'success', 2);
+      resetTurns();
+    } else {
+      alertify.notify('Items did not match', 'error', 2);
+      setTimeout(() => {
         resetTurns();
-      } else {
-        setTimeout(() => {
-          resetTurns();
-        }, 1000);
-        
-      }
+      }, 1000);
     }
-  },[choiceOne, choiceTwo]);
+  }
+}, [choiceOne, choiceTwo]);
+
 
   // reset the state then count the number it takes in a turn
   const resetTurns = () => {
