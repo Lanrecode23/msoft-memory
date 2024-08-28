@@ -45,11 +45,23 @@ function App() {
     if (choiceOne && choiceTwo) {
       setDisabled(true);
       if (choiceOne.src === choiceTwo.src) {
-        alert('Match!');
+        setCards((prevCard)=>{
+          return prevCard.map((card) => {
+            if (card.src === choiceOne.src || card.src === choiceTwo.src) {
+              return {...card, matched: true };    
+            }else{
+            return card;
+            }
+          })
+          
+        })
+      
         resetTurns();
       } else {
-        alert('No match!');
-        resetTurns();
+        setTimeout(() => {
+          resetTurns();
+        }, 1000);
+        
       }
     }
   },[choiceOne, choiceTwo]);
@@ -59,7 +71,10 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns(turns + 1);
+    setDisabled(false);
   }
+
+  
 
   return (
     <div className="App">
@@ -72,6 +87,7 @@ function App() {
           key={card.id} 
           card = {card}  
           handleChoice = {handleChoice} 
+          flipped = {card === choiceOne || card === choiceTwo || card.matched}
           disabled = {disabled}
           />
         ))}
